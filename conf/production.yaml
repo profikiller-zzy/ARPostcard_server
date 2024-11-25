@@ -1,0 +1,22 @@
+mysql:
+  host: 127.0.0.1
+  port: 3306
+  config: charset=utf8mb4&parseTime=True&loc=Local
+  db: ad_db
+  user: root
+  password: root
+  log_level: dev
+system:
+  host: 0.0.0.0
+  port: :8081
+  env: release
+redis:
+  ip: 127.0.0.1
+  port: 6379
+  password:
+  db: 6
+  pool_size: 100
+jwt:
+  secret: xxx
+  expires: 20
+  issuer: "xxx"
