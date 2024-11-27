@@ -1,13 +1,13 @@
 package infra
 
 import (
+	"ARPostcard_server/biz/conf"
+	"ARPostcard_server/biz/consts"
 	"context"
 	"github.com/RanFeng/ierror"
 	"github.com/RanFeng/ilog"
 	"github.com/go-redis/redis"
 	"time"
-	"uav/biz/conf"
-	"uav/biz/consts"
 )
 
 var RedisCli *redis.Client

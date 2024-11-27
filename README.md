@@ -1,4 +1,4 @@
-# 用于go-hertz框架的模板项目
+# ARPostcard_server
 
 ## 项目结构
 ```text
@@ -21,11 +21,3 @@
 1. 安装项目所需要的包，命令行中使用 `go mod tidy`
 2. 修改 biz/conf/enter.go 中的常量，让 ConfigFile 指向正确的配置文件
 3. 运行项目，命令行中使用 `go run main.go`，或者使用IDE中的运行按钮
-
-## 开发日志
-```text
-- 2024-09-11
-    - 登录接口 √
-    - 注册接口 √
-    - 菜单列表接口 √
-```

@@ -1,10 +1,10 @@
 package utils
 
 import (
+	"ARPostcard_server/biz/conf"
+	"ARPostcard_server/biz/consts"
 	"github.com/dgrijalva/jwt-go/v4"
 	"time"
-	"uav/biz/conf"
-	"uav/biz/consts"
 )
 
 // JwtPayLoad jwt中payload数据

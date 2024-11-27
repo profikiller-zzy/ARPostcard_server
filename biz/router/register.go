@@ -1,8 +1,8 @@
 package router
 
 import (
+	"ARPostcard_server/biz/mw/response_header"
 	"github.com/cloudwego/hertz/pkg/app/server"
-	"uav/biz/mw/response_header"
 )
 
 func Register(r *server.Hertz) {

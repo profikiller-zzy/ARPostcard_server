@@ -1,8 +1,8 @@
 package router
 
 import (
+	"ARPostcard_server/biz/handler"
 	"github.com/cloudwego/hertz/pkg/route"
-	"uav/biz/handler"
 )
 
 func UserRegister(r route.IRouter) {

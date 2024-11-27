@@ -1,9 +1,9 @@
 package menu_service
 
 import (
+	"ARPostcard_server/biz/dao"
+	"ARPostcard_server/biz/model"
 	"context"
-	"uav/biz/dao"
-	"uav/biz/model"
 )
 
 // GetMenuList 获取菜单列表

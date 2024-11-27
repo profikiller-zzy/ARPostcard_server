@@ -1,9 +1,9 @@
 package router
 
 import (
+	"ARPostcard_server/biz/handler"
+	"ARPostcard_server/biz/mw/jwt_auth"
 	"github.com/cloudwego/hertz/pkg/route"
-	"uav/biz/handler"
-	"uav/biz/mw/jwt_auth"
 )
 
 func MenuRegister(r route.IRouter) {

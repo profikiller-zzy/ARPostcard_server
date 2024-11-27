@@ -1,11 +1,11 @@
 package handler
 
 import (
+	"ARPostcard_server/biz/mw/jwt_auth"
+	menu_service "ARPostcard_server/biz/service/menu"
+	"ARPostcard_server/biz/utils"
 	"context"
 	"github.com/cloudwego/hertz/pkg/app"
-	"uav/biz/mw/jwt_auth"
-	menu_service "uav/biz/service/menu"
-	"uav/biz/utils"
 )
 
 // MenuList 获取菜单列表

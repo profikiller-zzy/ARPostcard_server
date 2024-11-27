@@ -1,10 +1,10 @@
 package infra
 
 import (
+	"ARPostcard_server/biz/conf"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"uav/biz/conf"
 )
 
 var MysqlDB *gorm.DB

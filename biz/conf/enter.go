@@ -13,6 +13,7 @@ type Config struct {
 	System System `yaml:"system"`
 	Jwt    Jwt    `yaml:"jwt"`
 	Redis  Redis  `yaml:"redis"`
+	EasyAR EasyAR `yaml:"easyAR"`
 }
 
 var Conf = new(Config)

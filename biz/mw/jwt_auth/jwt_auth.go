@@ -1,11 +1,11 @@
 package jwt_auth
 
 import (
+	"ARPostcard_server/biz/consts"
+	"ARPostcard_server/biz/utils"
 	"context"
 	"github.com/RanFeng/ierror"
 	"github.com/cloudwego/hertz/pkg/app"
-	"uav/biz/consts"
-	"uav/biz/utils"
 )
 
 func JwtAuth() app.HandlerFunc {

@@ -1,12 +1,12 @@
 package user_service
 
 import (
+	"ARPostcard_server/biz/consts"
+	"ARPostcard_server/biz/dao"
+	"ARPostcard_server/biz/model"
+	"ARPostcard_server/biz/utils"
 	"context"
 	"github.com/RanFeng/ierror"
-	"uav/biz/consts"
-	"uav/biz/dao"
-	"uav/biz/model"
-	"uav/biz/utils"
 )
 
 type UserLoginByUsernameReq struct {
@@ -34,10 +34,8 @@ func UserLogin(ctx context.Context, username, password string) (string, error) {
 	}
 
 	payLoad := utils.JwtPayLoad{
-		UserID:   uint(user.ID),
-		NickName: user.NickName,
-		Avatar:   user.Avatar,
-		Role:     int(user.Role),
+		UserID: uint(user.ID),
+		Role:   int(user.Role),
 	}
 
 	// 生成token

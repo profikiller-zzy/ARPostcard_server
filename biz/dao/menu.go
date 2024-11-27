@@ -1,9 +1,9 @@
 package dao
 
 import (
+	"ARPostcard_server/biz/infra"
+	"ARPostcard_server/biz/model"
 	"context"
-	"uav/biz/infra"
-	"uav/biz/model"
 )
 
 func GetMenuList(ctx context.Context, role int) ([]model.Menu, error) {

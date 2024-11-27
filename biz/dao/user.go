@@ -1,12 +1,12 @@
 package dao
 
 import (
+	"ARPostcard_server/biz/consts"
+	"ARPostcard_server/biz/infra"
+	"ARPostcard_server/biz/model"
 	"context"
 	"github.com/RanFeng/ierror"
 	"github.com/RanFeng/ilog"
-	"uav/biz/consts"
-	"uav/biz/infra"
-	"uav/biz/model"
 )
 
 func QueryUserByUserName(ctx context.Context, username string) (*model.User, error) {

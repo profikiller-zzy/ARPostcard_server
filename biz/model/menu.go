@@ -10,6 +10,10 @@ type Menu struct {
 	Children  []*Menu `gorm:"foreignKey:PID" json:"children"`
 }
 
+func (Menu) TableName() string {
+	return "menus"
+}
+
 // BuildMenuTree 将 MenuModel 列表转换为树状结构
 func BuildMenuTree(menuList []Menu) []*Menu {
 	// 创建一个映射，用于快速查找每个节点的 ID 对应的索引

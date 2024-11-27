@@ -3,11 +3,11 @@
 package main
 
 import (
+	"ARPostcard_server/biz/conf"
+	"ARPostcard_server/biz/infra"
+	"ARPostcard_server/biz/mw/cors"
+	"ARPostcard_server/biz/router"
 	"github.com/cloudwego/hertz/pkg/app/server"
-	"uav/biz/conf"
-	"uav/biz/infra"
-	"uav/biz/mw/cors"
-	"uav/biz/router"
 )
 
 func main() {
