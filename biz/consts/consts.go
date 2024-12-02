@@ -19,6 +19,7 @@ const (
 	PhoneNumInvalid
 	NoLogin
 	UserExist
+	UserNotExist
 )
 
 var (

@@ -6,9 +6,10 @@ import (
 )
 
 func Register(r *server.Hertz) {
-	uav := r.Group("/uav")
-	uav.Use(response_header.RespLog())
+	arPostcard := r.Group("/ar_postcard")
+	arPostcard.Use(response_header.RespLog())
 
-	MenuRegister(uav)
-	UserRegister(uav)
+	MenuRegister(arPostcard)
+	UserRegister(arPostcard)
+	ImageRegister(arPostcard)
 }
