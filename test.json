@@ -1,0 +1,13 @@
+{
+  "Request":{
+    "name":"ABC",
+    "image":"",
+    "type":"ImageTarget",
+    "size":"1",
+    "meta":""
+  },
+  "timestamp":1733207080196,
+  "appId":"ed27472440416911094c02671f3e73c1",
+  "apiKey":"1a5468849c43958e2262d79a15b1a917",
+  "signature":"7815ff45039536c97423166b86b9544a31d98819f44a603e332a69f67a5b3d12"
+}

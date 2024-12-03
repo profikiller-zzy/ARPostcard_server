@@ -10,5 +10,6 @@ func ImageRegister(r route.IRouter) {
 	{
 		_image.POST("", handler.ImageCreate)
 		_image.GET("/prefab_name", handler.GetPrefabName)
+		_image.GET("/image_list", handler.GetImageList)
 	}
 }

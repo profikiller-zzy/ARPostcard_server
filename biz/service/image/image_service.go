@@ -2,13 +2,13 @@ package image_serveice
 
 import (
 	"ARPostcard_server/biz/dao"
-	"ARPostcard_server/biz/utils"
+	"ARPostcard_server/biz/utils/easyAR"
 	"context"
 )
 
 // TargetRequest 表示目标上传的请求
 type TargetRequest struct {
-	utils.TargetRequest
+	easyAR.TargetRequest
 	PrefabName string `json:"prefab_name"`
 }
 
@@ -17,8 +17,12 @@ type PrefabNameRequest struct {
 	TargetID string `json:"image_id" query:"image_id"`
 }
 
+type TargetListRequest struct {
+	easyAR.TargetListRequest
+}
+
 func ImageCreate(ctx context.Context, req TargetRequest) error {
-	imageID, err := utils.CreateTarget(req.TargetRequest)
+	imageID, err := easyAR.CreateTarget(req.TargetRequest)
 	if err != nil {
 		return err
 	}
@@ -38,4 +42,13 @@ func GetPrefabName(ctx context.Context, req PrefabNameRequest) (string, error) {
 	}
 
 	return image.PrefabName, nil
+}
+
+func GetImageList(ctx context.Context, req TargetListRequest) ([]string, error) {
+	imageIDs, err := easyAR.GetTargetList(req.TargetListRequest)
+	if err != nil {
+		return nil, err
+	}
+
+	return imageIDs, nil
 }

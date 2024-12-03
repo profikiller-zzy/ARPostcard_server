@@ -14,9 +14,12 @@ import (
 func QueryUserByUserName(ctx context.Context, username string) (*model.User, error) {
 	user := &model.User{}
 	err := infra.MysqlDB.WithContext(ctx).Debug().
-		Where("user_name = ? OR email = ?", username, username).
+		Where("user_name = ?", username).
 		First(user).Error
 	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
 		ilog.EventError(ctx, err, "dao_get_user_by_username_error", "username", username)
 		return nil, ierror.NewIError(consts.DBError, err.Error())
 	}

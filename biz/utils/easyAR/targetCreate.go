@@ -1,4 +1,4 @@
-package utils
+package easyAR
 
 import (
 	"ARPostcard_server/biz/conf"
@@ -21,9 +21,9 @@ type TargetRequest struct {
 	Meta  string `json:"meta"`
 }
 
-// SignedParams 表示带签名的参数
-type signedParams struct {
-	*TargetRequest
+// signedRequest 表示带签名的参数
+type signedRequest struct {
+	Request   interface{}
 	Timestamp int64  `json:"timestamp"`
 	AppId     string `json:"appId"`
 	ApiKey    string `json:"apiKey"`
@@ -43,21 +43,23 @@ type TargetResult struct {
 }
 
 // CreateTarget 创建新的目标
-func CreateTarget(imgInfo TargetRequest) (string, error) {
+func CreateTarget(request TargetRequest) (string, error) {
 	params := &TargetRequest{
-		Name:  imgInfo.Name,
-		Image: imgInfo.Image,
-		Type:  imgInfo.Type,
-		Size:  imgInfo.Size,
-		Meta:  imgInfo.Meta,
+		Name:  request.Name,
+		Image: request.Image,
+		Type:  request.Type,
+		Size:  request.Size,
+		Meta:  request.Meta,
 	}
 
+	// 这里的 signedParams 是一个map[string]interface{}
 	signedParams, err := signParam(params)
 	if err != nil {
 		return "", err
 	}
 
 	jsonData, err := json.Marshal(signedParams)
+	fmt.Println(string(jsonData))
 	if err != nil {
 		return "", err
 	}
@@ -78,6 +80,7 @@ func CreateTarget(imgInfo TargetRequest) (string, error) {
 	defer resp.Body.Close()
 
 	respBody, err := ioutil.ReadAll(resp.Body)
+	fmt.Println(string(respBody))
 	if err != nil {
 		return "", err
 	}
@@ -93,19 +96,40 @@ func CreateTarget(imgInfo TargetRequest) (string, error) {
 	return targetResponse.Result.TargetId, nil
 }
 
-// signParam 对请求参数进行签名
-func signParam(params *TargetRequest) (*signedParams, error) {
+// @Title signParam
+// @Description 对前端传来的参数进行签名
+// @Param params 接口类型，其动态类型是request指针
+func signParam(params interface{}) (map[string]interface{}, error) {
 	timestamp := time.Now().UnixNano() / 1e6
 	easyARConf := conf.Conf.EasyAR
-	paramMap := map[string]interface{}{
-		"name":      params.Name,
-		"image":     params.Image,
-		"type":      params.Type,
-		"size":      params.Size,
-		"meta":      params.Meta,
-		"timestamp": timestamp,
-		"appId":     easyARConf.CrsAppID,
-		"apiKey":    easyARConf.ApiKey,
+
+	var paramMap map[string]interface{}
+
+	// 通过类型断言判断 `params` 的动态类型
+	switch v := params.(type) {
+	case *TargetRequest:
+		// 如果是 TargetRequest 指针类型
+		paramMap = map[string]interface{}{
+			"name":      v.Name,
+			"image":     v.Image,
+			"type":      v.Type,
+			"size":      v.Size,
+			"meta":      v.Meta,
+			"timestamp": timestamp,
+			"appId":     easyARConf.CrsAppID,
+			"apiKey":    easyARConf.ApiKey,
+		}
+	case *TargetListRequest:
+		// 如果是 ListTargetRequest 指针类型
+		paramMap = map[string]interface{}{
+			"pageNum":   v.PageNum,
+			"pageSize":  v.PageSize,
+			"timestamp": timestamp,
+			"appId":     easyARConf.CrsAppID,
+			"apiKey":    easyARConf.ApiKey,
+		}
+	default:
+		return nil, fmt.Errorf("unsupported parameter type: %T", params)
 	}
 
 	keys := make([]string, 0, len(paramMap))
@@ -117,15 +141,9 @@ func signParam(params *TargetRequest) (*signedParams, error) {
 	paramStr := strings.Join(sortKeysAndValues(keys, paramMap), "")
 	signature := generateSignature(paramStr, easyARConf.ApiSecret)
 
-	signedParams := &signedParams{
-		TargetRequest: params,
-		Timestamp:     timestamp,
-		AppId:         easyARConf.CrsAppID,
-		ApiKey:        easyARConf.ApiKey,
-		Signature:     signature,
-	}
+	paramMap["signature"] = signature
 
-	return signedParams, nil
+	return paramMap, nil
 }
 
 // sortKeysAndValues 对参数键值对进行排序并拼接

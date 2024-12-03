@@ -42,3 +42,22 @@ func GetPrefabName(ctx context.Context, c *app.RequestContext) {
 
 	utils.RespOK(ctx, c, prefabName)
 }
+
+func GetImageList(ctx context.Context, c *app.RequestContext) {
+	var err error
+	var req image_serveice.TargetListRequest
+
+	if err = c.BindAndValidate(&req); err != nil {
+		utils.RespErr(ctx, c, err)
+		return
+	}
+
+	imageIDs, err := image_serveice.GetImageList(ctx, req)
+
+	if err != nil {
+		utils.RespErr(ctx, c, err)
+		return
+	}
+
+	utils.RespOK(ctx, c, imageIDs)
+}
