@@ -128,6 +128,13 @@ func signParam(params interface{}) (map[string]interface{}, error) {
 			"appId":     easyARConf.CrsAppID,
 			"apiKey":    easyARConf.ApiKey,
 		}
+	case *TargetInfoRequest:
+		// 如果是 TargetInfoRequest 指针类型
+		paramMap = map[string]interface{}{
+			"timestamp": timestamp,
+			"appId":     easyARConf.CrsAppID,
+			"apiKey":    easyARConf.ApiKey,
+		}
 	default:
 		return nil, fmt.Errorf("unsupported parameter type: %T", params)
 	}

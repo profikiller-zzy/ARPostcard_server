@@ -12,8 +12,8 @@ import (
 
 // TargetListRequest 图库的目标图像列表请求`
 type TargetListRequest struct {
-	PageNum  int64 `json:"pageNum"`
-	PageSize int64 `json:"pageSize"`
+	PageNum  int `json:"pageNum" query:"pageNum"`
+	PageSize int `json:"pageSize" query:"pageSize"`
 }
 
 type TargetListResponse struct {

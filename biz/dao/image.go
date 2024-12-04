@@ -37,3 +37,25 @@ func GetImageByImageID(ctx context.Context, imageID string) (*model.Image, error
 	}
 	return image, nil
 }
+
+// PGetImages 分页获取image
+func PGetImages(ctx context.Context, pageNum int, pageSize int) ([]*model.Image, int64, error) {
+	var images []*model.Image
+	var total int64
+	err := infra.MysqlDB.WithContext(ctx).Debug().
+		Offset((pageNum - 1) * pageSize).Limit(pageSize).
+		Find(&images).Error
+	if err != nil {
+		ilog.EventError(ctx, err, "dao_get_images_error")
+		return nil, 0, ierror.NewIError(consts.DBError, err.Error())
+	}
+
+	err = infra.MysqlDB.WithContext(ctx).Debug().
+		Model(&model.Image{}).Count(&total).Error
+	if err != nil {
+		ilog.EventError(ctx, err, "dao_get_images_count_error")
+		return nil, 0, ierror.NewIError(consts.DBError, err.Error())
+	}
+
+	return images, total, nil
+}
