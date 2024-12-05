@@ -3,6 +3,7 @@
 package main
 
 import (
+	"ARPostcard_server/biz/cflag"
 	"ARPostcard_server/biz/conf"
 	"ARPostcard_server/biz/infra"
 	"ARPostcard_server/biz/mw/cors"
@@ -14,6 +15,8 @@ func main() {
 	conf.Init()
 	infra.InitMysql() // 初始化mysql
 	infra.InitRedis() // 初始化redis
+	// 捕获命令行参数，并对不同命令行参数的值来执行不同的操作
+	cflag.Parse()
 	h := server.Default(server.WithHostPorts(conf.Conf.System.Port))
 	h.Use(cors.CorsMw()) // 使用跨域中间件
 	router.Register(h)   // 注册路由

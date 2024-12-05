@@ -1,10 +1,10 @@
 mysql:
-  host: 43.138.43.19
+  host: 127.0.0.1
   port: 3306
   config: charset=utf8mb4&parseTime=True&loc=Local
-  db: ARPostcard
+  db: ar_postcard
   user: root
-  password: 36578971wyc
+  password: 200301312934aA
   log_level: dev
 system:
   host: 0.0.0.0
@@ -21,7 +21,15 @@ jwt:
   expires: 20
   issuer: "xxx"
 easyAR:
-  cloud_url: https://e4286ed827a7a9b04931b6b17dae07a9.cn1.crs.easyar.com:443
-  crs_app_id: ed27472440416911094c02671f3e73c1
-  api_key: 1a5468849c43958e2262d79a15b1a917
-  api_secret: c0e49142dfa2489cd4d1b38cc75d16248e4e7184c96df307f0305812dd48cc20
+  cloud_url: https://a8207c5665a6a9876f63fefaf303b882.cn1.crs.easyar.com:8443
+  crs_app_id: 4072eb3736599a4081f24bd9c5052bb1
+  api_key: a553c4077e000661fb9c16dfd98a0fba
+  api_secret: 03890903751ec2c81012afdca6c3846096a74c262ebfc7e638d1fe477e0b9212
+qi_niu:
+  enable: true
+  access_key: 1HlGSQlD_2sLtyRB9BlOTv7VibTfA48mXQ6zer8D
+  secret_key: nz5nqqZjtHFtgCc8eQ6wLZurnEutTrB_7src69jl
+  bucket: profikiller
+  cdn: rt8ywig7i.bkt.clouddn.com
+  zone: cn-east-2
+  size: 5
