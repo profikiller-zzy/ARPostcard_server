@@ -4,5 +4,5 @@ package model
 type Video struct {
 	MODEL
 	VideoURL  string `gorm:"size:128" json:"video_url"` // 视频URL，存储到对象存储服务当中的URL
-	VideoName string `gorm:"size:64" json:"video_name"` // 视频名称
+	VideoName string `gorm:"size:64" json:"video_name"` // 视频名称，存储在本地的视频链接
 }

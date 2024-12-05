@@ -42,7 +42,7 @@ type TargetResult struct {
 	TargetId string `json:"targetId"`
 }
 
-// CreateTarget 创建新的目标
+// CreateTarget 向云识别库发送请求，创建新的目标，返回云识别的图id
 func CreateTarget(request TargetRequest) (string, error) {
 	params := &TargetRequest{
 		Name:  request.Name,

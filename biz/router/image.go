@@ -14,5 +14,6 @@ func ImageRegister(r route.IRouter) {
 		_image.POST("/image_info", handler.GetImageInfo)
 		_easyAR := _image.Group("/easyAR")
 		_easyAR.GET("/image_list", handler.GetImageList)
+		_image.GET("/video_name", handler.GetVideoName)
 	}
 }

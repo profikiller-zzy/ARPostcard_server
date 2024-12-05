@@ -12,10 +12,16 @@ import (
 type TargetRequest struct {
 	easyAR.TargetRequest
 	PrefabName string `json:"prefab_name"`
+	VideoName  string `json:"video_name"`
 }
 
 // PrefabNameRequest 表示获取预制体名称的请求
 type PrefabNameRequest struct {
+	TargetID string `json:"image_id" query:"image_id"`
+}
+
+// VideoNameRequest 表示获取绑定的视频名称的请求
+type VideoNameRequest struct {
 	TargetID string `json:"image_id" query:"image_id"`
 }
 
@@ -49,12 +55,21 @@ func ImageCreate(ctx context.Context, req TargetRequest) error {
 		return err
 	}
 
-	err = dao.CreateImage(ctx, imageID, "", req.PrefabName)
+	err = dao.CreateImage(ctx, imageID, "", req.PrefabName, req.VideoName)
 	if err != nil {
 		return err
 	}
 
 	return nil
+}
+
+func GetVideoName(ctx context.Context, req VideoNameRequest) (string, error) {
+	image, err := dao.GetImageByImageID(ctx, req.TargetID)
+	if err != nil {
+		return "", err
+	}
+
+	return image.VideoName, nil
 }
 
 func GetPrefabName(ctx context.Context, req PrefabNameRequest) (string, error) {
