@@ -21,7 +21,7 @@ jwt:
   expires: 20
   issuer: "xxx"
 easyAR:
-  cloud_url: https://e4286ed827a7a9b04931b6b17dae07a9.cn1.crs.easyar.com:443
-  crs_app_id: ed27472440416911094c02671f3e73c1
-  api_key: 1a5468849c43958e2262d79a15b1a917
-  api_secret: c0e49142dfa2489cd4d1b38cc75d16248e4e7184c96df307f0305812dd48cc20
+  cloud_url: https://1c87fb4625bb18cda0ddcb28991831c9.cn1.crs.easyar.com:443
+  crs_app_id: e3486b5ea8d8e51b644df6067137d80d
+  api_key: 19237b27711bc4d7a4331547ed39ff1a
+  api_secret: 3b5c70012d49dd707dbd8f1f5f394ee41f20cdf43889fb969ff9c7f8205f5195
