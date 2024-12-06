@@ -4,6 +4,7 @@ import (
 	image_serveice "ARPostcard_server/biz/service/image"
 	"ARPostcard_server/biz/utils"
 	"context"
+	"fmt"
 	"github.com/cloudwego/hertz/pkg/app"
 )
 
@@ -35,6 +36,7 @@ func GetVideoName(ctx context.Context, c *app.RequestContext) {
 	}
 
 	videoName, err := image_serveice.GetVideoName(ctx, req)
+	fmt.Println(videoName)
 	if err != nil {
 		utils.RespErr(ctx, c, err)
 		return

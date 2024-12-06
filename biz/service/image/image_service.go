@@ -37,6 +37,7 @@ type ImageInfoRequest struct {
 type ImageAllInfo struct {
 	ImageID     string `json:"image_id"`
 	ImageURL    string `json:"image_url"`
+	ImageName   string `json:"image_name"` // 图片名称
 	PrefabName  string `json:"prefab_name"`
 	Size        int    `json:"size"`         // 图片大小，其实是在场景中的大小，以厘米为单位
 	ImageBase64 string `json:"image_base64"` // 图片的base64编码
@@ -113,6 +114,7 @@ func GetImageInfo(ctx context.Context, req ImageInfoRequest) (*ImageInfoResponse
 			imageInfo = &ImageAllInfo{
 				ImageID:    image.ImageID,
 				ImageURL:   image.ImageURL,
+				ImageName:  image.ImageName,
 				PrefabName: image.PrefabName,
 				CreatedAt:  image.CreatedAt,
 				UpdatedAt:  image.UpdatedAt,
