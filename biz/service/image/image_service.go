@@ -56,7 +56,7 @@ func ImageCreate(ctx context.Context, req TargetRequest) error {
 		return err
 	}
 
-	err = dao.CreateImage(ctx, imageID, "", req.PrefabName, req.VideoName)
+	err = dao.CreateImage(ctx, imageID, "", req.PrefabName, req.VideoName, req.TargetRequest.Name)
 	if err != nil {
 		return err
 	}
@@ -70,7 +70,7 @@ func GetVideoName(ctx context.Context, req VideoNameRequest) (string, error) {
 		return "", err
 	}
 
-	return image.VideoName, nil
+	return image.ImageName, nil
 }
 
 func GetPrefabName(ctx context.Context, req PrefabNameRequest) (string, error) {
@@ -79,7 +79,7 @@ func GetPrefabName(ctx context.Context, req PrefabNameRequest) (string, error) {
 		return "", err
 	}
 
-	return image.PrefabName, nil
+	return image.ImageName, nil
 }
 
 func GetImageList(ctx context.Context, req TargetListRequest) ([]string, error) {
@@ -112,12 +112,11 @@ func GetImageInfo(ctx context.Context, req ImageInfoRequest) (*ImageInfoResponse
 			}
 		} else {
 			imageInfo = &ImageAllInfo{
-				ImageID:    image.ImageID,
-				ImageURL:   image.ImageURL,
-				ImageName:  image.ImageName,
-				PrefabName: image.PrefabName,
-				CreatedAt:  image.CreatedAt,
-				UpdatedAt:  image.UpdatedAt,
+				ImageID:   image.ImageID,
+				ImageURL:  image.ImageURL,
+				ImageName: image.ImageName,
+				CreatedAt: image.CreatedAt,
+				UpdatedAt: image.UpdatedAt,
 			}
 		}
 

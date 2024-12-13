@@ -21,15 +21,14 @@ jwt:
   expires: 20
   issuer: "xxx"
 easyAR:
-  cloud_url: https://a8207c5665a6a9876f63fefaf303b882.cn1.crs.easyar.com:443
-  crs_app_id: 4072eb3736599a4081f24bd9c5052bb1
-  api_key: a553c4077e000661fb9c16dfd98a0fba
-  api_secret: 03890903751ec2c81012afdca6c3846096a74c262ebfc7e638d1fe477e0b9212
+  cloud_url: https://1c87fb4625bb18cda0ddcb28991831c9.cn1.crs.easyar.com:443
+  crs_app_id: e3486b5ea8d8e51b644df6067137d80d
+  api_key: 19237b27711bc4d7a4331547ed39ff1a
+  api_secret: 3b5c70012d49dd707dbd8f1f5f394ee41f20cdf43889fb969ff9c7f8205f5195
 qi_niu:
-  enable: true
   access_key: 1HlGSQlD_2sLtyRB9BlOTv7VibTfA48mXQ6zer8D
   secret_key: nz5nqqZjtHFtgCc8eQ6wLZurnEutTrB_7src69jl
-  bucket: profikiller
-  cdn: rt8ywig7i.bkt.clouddn.com
-  zone: cn-east-2
+  bucket: cinema-admin
+  cdn: photo.zjyprofikiller.top
+  zone: z2
   size: 5
