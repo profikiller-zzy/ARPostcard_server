@@ -4,7 +4,6 @@ import (
 	image_service "ARPostcard_server/biz/service/image"
 	"ARPostcard_server/biz/utils"
 	"context"
-	"fmt"
 	"github.com/cloudwego/hertz/pkg/app"
 )
 
@@ -27,41 +26,22 @@ func ImageCreate(ctx context.Context, c *app.RequestContext) {
 	utils.RespOK(ctx, c, nil)
 }
 
-func GetVideoName(ctx context.Context, c *app.RequestContext) {
+func GetPrefabAndVideo(ctx context.Context, c *app.RequestContext) {
 	var err error
-	var req image_service.VideoNameRequest
+	var req image_service.PrefabRequest
 
 	if err = c.BindAndValidate(&req); err != nil {
 		utils.RespErr(ctx, c, err)
 		return
 	}
 
-	videoName, err := image_service.GetVideoName(ctx, req)
-	fmt.Println(videoName)
+	result, err := image_service.GetPrefabAndVideo(ctx, req)
 	if err != nil {
 		utils.RespErr(ctx, c, err)
 		return
 	}
 
-	utils.RespOK(ctx, c, videoName)
-}
-
-func GetPrefabName(ctx context.Context, c *app.RequestContext) {
-	var err error
-	var req image_service.PrefabNameRequest
-
-	if err = c.BindAndValidate(&req); err != nil {
-		utils.RespErr(ctx, c, err)
-		return
-	}
-
-	prefabName, err := image_service.GetPrefabName(ctx, req)
-	if err != nil {
-		utils.RespErr(ctx, c, err)
-		return
-	}
-
-	utils.RespOK(ctx, c, prefabName)
+	utils.RespOK(ctx, c, result)
 }
 
 func GetImageList(ctx context.Context, c *app.RequestContext) {
