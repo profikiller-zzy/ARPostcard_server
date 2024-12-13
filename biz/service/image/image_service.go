@@ -1,18 +1,22 @@
-package image_serveice
+package image_service
 
 import (
 	"ARPostcard_server/biz/dao"
 	"ARPostcard_server/biz/model"
 	"ARPostcard_server/biz/utils/easyAR"
+	"ARPostcard_server/biz/utils/qiniu"
 	"context"
 	"github.com/RanFeng/ilog"
+	"github.com/cloudwego/hertz/pkg/app"
+	"mime/multipart"
+	"strconv"
 )
 
 // TargetRequest 表示目标上传的请求
 type TargetRequest struct {
 	easyAR.TargetRequest
-	PrefabName string `json:"prefab_name"`
-	VideoName  string `json:"video_name"`
+	PrefabId int64 `json:"prefab_name"`
+	Video    *multipart.FileHeader
 }
 
 // PrefabNameRequest 表示获取预制体名称的请求
@@ -50,13 +54,51 @@ type ImageInfoResponse struct {
 	Images []*ImageAllInfo `json:"images"`
 }
 
+func GetImageInfoFromForm(ctx context.Context, requestContext *app.RequestContext) (*TargetRequest, error) {
+	req := &TargetRequest{}
+	// 处理字符串部分
+	req.Name = string(requestContext.FormValue("name"))
+	req.Image = string(requestContext.FormValue("image"))
+	req.Type = string(requestContext.FormValue("type"))
+	req.Size = string(requestContext.FormValue("size"))
+	req.Meta = string(requestContext.FormValue("meta"))
+
+	// 处理整数部分
+	prefabIdStr := string(requestContext.FormValue("prefab_id"))
+	prefabId, err := strconv.ParseInt(prefabIdStr, 10, 64)
+	if err != nil {
+		ilog.EventError(ctx, err, "parse_prefab_id_error", "prefabId", prefabIdStr)
+		return nil, err
+	}
+	req.PrefabId = prefabId
+
+	// 处理文件部分
+	video, err := requestContext.FormFile("video")
+	if err != nil {
+		ilog.EventError(ctx, err, "get_video_file_error")
+		return nil, err
+	}
+	req.Video = video
+
+	return req, nil
+}
+
 func ImageCreate(ctx context.Context, req TargetRequest) error {
 	imageID, err := easyAR.CreateTarget(req.TargetRequest)
 	if err != nil {
 		return err
 	}
 
-	err = dao.CreateImage(ctx, imageID, "", req.PrefabName, req.VideoName, req.TargetRequest.Name)
+	url, name, err := qiniu.UploadFileToQiniu(req.Video)
+	if err != nil {
+		return err
+	}
+
+	videoID, err := dao.CreateVideo(ctx, name, url)
+	if err != nil {
+		return err
+	}
+	err = dao.CreateImage(ctx, imageID, "", req.Name, req.PrefabId, videoID)
 	if err != nil {
 		return err
 	}

@@ -1,7 +1,7 @@
 package handler
 
 import (
-	image_serveice "ARPostcard_server/biz/service/image"
+	image_service "ARPostcard_server/biz/service/image"
 	"ARPostcard_server/biz/utils"
 	"context"
 	"fmt"
@@ -10,14 +10,15 @@ import (
 
 func ImageCreate(ctx context.Context, c *app.RequestContext) {
 	var err error
-	var req image_serveice.TargetRequest
 
-	if err = c.BindAndValidate(&req); err != nil {
+	req, err := image_service.GetImageInfoFromForm(ctx, c)
+
+	if err != nil {
 		utils.RespErr(ctx, c, err)
 		return
 	}
 
-	err = image_serveice.ImageCreate(ctx, req)
+	err = image_service.ImageCreate(ctx, *req)
 	if err != nil {
 		utils.RespErr(ctx, c, err)
 		return
@@ -28,14 +29,14 @@ func ImageCreate(ctx context.Context, c *app.RequestContext) {
 
 func GetVideoName(ctx context.Context, c *app.RequestContext) {
 	var err error
-	var req image_serveice.VideoNameRequest
+	var req image_service.VideoNameRequest
 
 	if err = c.BindAndValidate(&req); err != nil {
 		utils.RespErr(ctx, c, err)
 		return
 	}
 
-	videoName, err := image_serveice.GetVideoName(ctx, req)
+	videoName, err := image_service.GetVideoName(ctx, req)
 	fmt.Println(videoName)
 	if err != nil {
 		utils.RespErr(ctx, c, err)
@@ -47,14 +48,14 @@ func GetVideoName(ctx context.Context, c *app.RequestContext) {
 
 func GetPrefabName(ctx context.Context, c *app.RequestContext) {
 	var err error
-	var req image_serveice.PrefabNameRequest
+	var req image_service.PrefabNameRequest
 
 	if err = c.BindAndValidate(&req); err != nil {
 		utils.RespErr(ctx, c, err)
 		return
 	}
 
-	prefabName, err := image_serveice.GetPrefabName(ctx, req)
+	prefabName, err := image_service.GetPrefabName(ctx, req)
 	if err != nil {
 		utils.RespErr(ctx, c, err)
 		return
@@ -65,14 +66,14 @@ func GetPrefabName(ctx context.Context, c *app.RequestContext) {
 
 func GetImageList(ctx context.Context, c *app.RequestContext) {
 	var err error
-	var req image_serveice.TargetListRequest
+	var req image_service.TargetListRequest
 
 	if err = c.BindAndValidate(&req); err != nil {
 		utils.RespErr(ctx, c, err)
 		return
 	}
 
-	imageIDs, err := image_serveice.GetImageList(ctx, req)
+	imageIDs, err := image_service.GetImageList(ctx, req)
 
 	if err != nil {
 		utils.RespErr(ctx, c, err)
@@ -85,14 +86,14 @@ func GetImageList(ctx context.Context, c *app.RequestContext) {
 // GetImageListFromDB 从数据库当中查询当前的图片，主要用于后台管理
 func GetImageListFromDB(ctx context.Context, c *app.RequestContext) {
 	var err error
-	var req image_serveice.TargetListRequest
+	var req image_service.TargetListRequest
 
 	if err = c.BindAndValidate(&req); err != nil {
 		utils.RespErr(ctx, c, err)
 		return
 	}
 
-	images, total, err := image_serveice.GetImageListFromDB(ctx, req)
+	images, total, err := image_service.GetImageListFromDB(ctx, req)
 
 	if err != nil {
 		utils.RespErr(ctx, c, err)
@@ -109,14 +110,14 @@ func GetImageListFromDB(ctx context.Context, c *app.RequestContext) {
 // GetImageInfo 获取图片的详细信息，先获取数据库当中的信息，然后获取在easyAR云端的信息
 func GetImageInfo(ctx context.Context, c *app.RequestContext) {
 	var err error
-	var req image_serveice.ImageInfoRequest
+	var req image_service.ImageInfoRequest
 
 	if err = c.BindAndValidate(&req); err != nil {
 		utils.RespErr(ctx, c, err)
 		return
 	}
 
-	image, err := image_serveice.GetImageInfo(ctx, req)
+	image, err := image_service.GetImageInfo(ctx, req)
 
 	if err != nil {
 		utils.RespErr(ctx, c, err)

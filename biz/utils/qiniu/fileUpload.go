@@ -11,8 +11,8 @@ import (
 	"path/filepath"
 )
 
-// uploadFileToQiniu 文件上传到七牛云
-func uploadFileToQiniu(fileHeader *multipart.FileHeader) (string, string, error) {
+// UploadFileToQiniu 文件上传到七牛云
+func UploadFileToQiniu(fileHeader *multipart.FileHeader) (string, string, error) {
 	qiniuConf := conf.Conf.Qiniu
 	mac := qbox.NewMac(qiniuConf.AccessKey, qiniuConf.SecretKey)
 	bucket := qiniuConf.Bucket

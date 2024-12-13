@@ -11,12 +11,13 @@ import (
 )
 
 // CreateImage 在数据库中创建一条image记录
-func CreateImage(ctx context.Context, imageID string, imageURL string, prefabName string, videoName string, imageName string) error {
+func CreateImage(ctx context.Context, imageID, imageUrl, imageName string, prefabID, videoID int64) error {
 	image := &model.Image{
-		ImageID:  imageID,
-		ImageURL: imageURL,
-		PrefabID: -1,
-		VideoID:  -1,
+		ImageID:   imageID,
+		ImageURL:  imageUrl,
+		ImageName: imageName,
+		PrefabID:  prefabID,
+		VideoID:   videoID,
 	}
 	err := infra.MysqlDB.WithContext(ctx).Debug().
 		Create(image).Error
