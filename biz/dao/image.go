@@ -5,7 +5,6 @@ import (
 	"ARPostcard_server/biz/infra"
 	"ARPostcard_server/biz/model"
 	"context"
-	"fmt"
 	"github.com/RanFeng/ierror"
 	"github.com/RanFeng/ilog"
 )
@@ -21,7 +20,6 @@ func CreateImage(ctx context.Context, imageID, imageUrl, imageName string, prefa
 	}
 	err := infra.MysqlDB.WithContext(ctx).Debug().
 		Create(image).Error
-	fmt.Println(image)
 	if err != nil {
 		ilog.EventError(ctx, err, "dao_create_image_error", "imageID", imageID)
 		return ierror.NewIError(consts.DBError, err.Error())

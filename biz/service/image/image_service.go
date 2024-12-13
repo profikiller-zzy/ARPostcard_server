@@ -73,7 +73,7 @@ func GetImageInfoFromForm(ctx context.Context, requestContext *app.RequestContex
 	req.PrefabId = prefabId
 
 	// 处理文件部分
-	video, err := requestContext.FormFile("video")
+	video, err := requestContext.FormFile("video_file")
 	if err != nil {
 		ilog.EventError(ctx, err, "get_video_file_error")
 		return nil, err
