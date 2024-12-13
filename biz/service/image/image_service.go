@@ -56,7 +56,7 @@ func ImageCreate(ctx context.Context, req TargetRequest) error {
 		return err
 	}
 
-	err = dao.CreateImage(ctx, imageID, "", req.PrefabName, req.VideoName)
+	err = dao.CreateImage(ctx, imageID, "", req.PrefabName, req.VideoName, req.TargetRequest.Name)
 	if err != nil {
 		return err
 	}
