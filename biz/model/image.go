@@ -10,8 +10,8 @@ type Image struct {
 	VideoID   int64  `gorm:"column:video_id" json:"video_id"`
 	//PrefabName string `gorm:"size:128" json:"prefab_name"` // 对应的模型的名称，unity获取之后，可以加载本地的Prefab
 	//VideoName  string `gorm:"size:64" json:"video_name"`   // 对应的识别的视频的名称，unity获取之后，可在组件中播放视频
-	Prefab Prefab `gorm:"foreignKey:PrefabID;references:PrefabID"`
-	Video  Video  `gorm:"foreignKey:VideoID;references:VideoID"`
+	//Prefab Prefab `gorm:"foreignKey:PrefabID;references:PrefabID"`
+	//Video  Video  `gorm:"foreignKey:VideoID;references:VideoID"`
 }
 
 func (Image) TableName() string {
