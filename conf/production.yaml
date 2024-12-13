@@ -4,7 +4,7 @@ mysql:
   config: charset=utf8mb4&parseTime=True&loc=Local
   db: ar_postcard
   user: root
-  password: root
+  password: 200301312934aA
   log_level: dev
 system:
   host: 0.0.0.0

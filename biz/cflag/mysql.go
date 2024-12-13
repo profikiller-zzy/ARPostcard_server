@@ -13,10 +13,10 @@ func MakeMigration() {
 	err = infra.MysqlDB.Set("gorm:table_options", "ENGINE=InnoDB").
 		AutoMigrate(
 			&model.User{},
+			&model.Menu{},
 			&model.Prefab{},
 			&model.Video{},
-			&model.Image{},
-			&model.Menu{})
+			&model.Image{})
 	if err != nil {
 		fmt.Printf(err.Error()) // 这里后续使用日志
 		return
