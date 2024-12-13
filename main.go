@@ -17,7 +17,7 @@ func main() {
 	infra.InitRedis() // 初始化redis
 	// 捕获命令行参数，并对不同命令行参数的值来执行不同的操作
 	cflag.Parse()
-	h := server.Default(server.WithHostPorts(conf.Conf.System.Port))
+	h := server.Default(server.WithHostPorts(conf.Conf.System.Port), server.WithMaxRequestBodySize(50<<20))
 	h.Use(cors.CorsMw()) // 使用跨域中间件
 	router.Register(h)   // 注册路由
 	h.Spin()

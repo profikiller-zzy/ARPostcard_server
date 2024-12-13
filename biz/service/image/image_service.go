@@ -19,8 +19,8 @@ type TargetRequest struct {
 	Video    *multipart.FileHeader
 }
 
-// PrefabNameRequest 表示获取预制体名称的请求
-type PrefabNameRequest struct {
+// PrefabRequest 表示获取预制体名称的请求
+type PrefabRequest struct {
 	TargetID string `json:"image_id" query:"image_id"`
 }
 
@@ -54,6 +54,12 @@ type ImageInfoResponse struct {
 	Images []*ImageAllInfo `json:"images"`
 }
 
+// PrefabAndVideoResponse 表示获取预制体名称和视频名称的响应
+type PrefabAndVideoResponse struct {
+	Prefab *model.Prefab `json:"prefab"`
+	Video  *model.Video  `json:"video"`
+}
+
 func GetImageInfoFromForm(ctx context.Context, requestContext *app.RequestContext) (*TargetRequest, error) {
 	req := &TargetRequest{}
 	// 处理字符串部分
@@ -73,7 +79,7 @@ func GetImageInfoFromForm(ctx context.Context, requestContext *app.RequestContex
 	req.PrefabId = prefabId
 
 	// 处理文件部分
-	video, err := requestContext.FormFile("video")
+	video, err := requestContext.FormFile("video_file")
 	if err != nil {
 		ilog.EventError(ctx, err, "get_video_file_error")
 		return nil, err
@@ -106,22 +112,34 @@ func ImageCreate(ctx context.Context, req TargetRequest) error {
 	return nil
 }
 
-func GetVideoName(ctx context.Context, req VideoNameRequest) (string, error) {
+func GetPrefabAndVideo(ctx context.Context, req PrefabRequest) (*PrefabAndVideoResponse, error) {
 	image, err := dao.GetImageByImageID(ctx, req.TargetID)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
+	var video *model.Video
+	var prefab *model.Prefab
 
-	return image.ImageName, nil
-}
-
-func GetPrefabName(ctx context.Context, req PrefabNameRequest) (string, error) {
-	image, err := dao.GetImageByImageID(ctx, req.TargetID)
+	// 获取prefab
+	prefab, err = dao.GetPrefabById(ctx, image.PrefabID)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
-	return image.ImageName, nil
+	if image.PrefabID == 1 {
+		// 此时代表是视频
+		video, err = dao.GetVideoById(ctx, image.VideoID)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	result := &PrefabAndVideoResponse{
+		Video:  video,
+		Prefab: prefab,
+	}
+
+	return result, nil
 }
 
 func GetImageList(ctx context.Context, req TargetListRequest) ([]string, error) {

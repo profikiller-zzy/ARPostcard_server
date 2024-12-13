@@ -9,11 +9,10 @@ func ImageRegister(r route.IRouter) {
 	_image := r.Group("/image")
 	{
 		_image.POST("", handler.ImageCreate)
-		_image.GET("/prefab_name", handler.GetPrefabName)
+		_image.GET("/prefab", handler.GetPrefabAndVideo)
 		_image.GET("/images", handler.GetImageListFromDB)
 		_image.POST("/image_info", handler.GetImageInfo)
 		_easyAR := _image.Group("/easyAR")
 		_easyAR.GET("/image_list", handler.GetImageList)
-		_image.GET("/video_name", handler.GetVideoName)
 	}
 }

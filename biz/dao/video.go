@@ -28,3 +28,13 @@ func CreateVideo(ctx context.Context, videoName, videoURL string) (int64, error)
 
 	return videoId, nil
 }
+
+func GetVideoById(ctx context.Context, id int64) (*model.Video, error) {
+	video := &model.Video{}
+	err := infra.MysqlDB.Where("video_id = ?", id).First(video).Error
+	if err != nil {
+		ilog.EventError(ctx, err, "dao_get_video_by_id_error")
+		return nil, err
+	}
+	return video, nil
+}
