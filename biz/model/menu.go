@@ -6,7 +6,7 @@ type Menu struct {
 	Path      string  `gorm:"type:varchar(32)" json:"path"`
 	Level     int     `gorm:"default:1" json:"level"`
 	Pid       int     // Parent menu ID
-	RoleLevel int     `gorm:"default:1"` // Role level 1 代表只有管理员可以使用 2 代表管理员和用户都可以使用
+	RoleLevel int     `gorm:"default:1"` // Role level 1 代表只有管理员可以使用 2 代.231表管理员和用户都可以使用
 	Children  []*Menu `gorm:"foreignKey:pid" json:"children"`
 }
 
