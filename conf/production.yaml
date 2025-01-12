@@ -1,10 +1,10 @@
 mysql:
-  host: 127.0.0.1
+  host: 8.155.34.188
   port: 3306
   config: charset=utf8mb4&parseTime=True&loc=Local
   db: ar_postcard
-  user: root
-  password: 200301312934aA
+  user: ar_postcard
+  password: 38163816aA
   log_level: dev
 system:
   host: 0.0.0.0
@@ -21,10 +21,10 @@ jwt:
   expires: 20
   issuer: "xxx"
 easyAR:
-  cloud_url: https://1c87fb4625bb18cda0ddcb28991831c9.cn1.crs.easyar.com:443
-  crs_app_id: e3486b5ea8d8e51b644df6067137d80d
-  api_key: 19237b27711bc4d7a4331547ed39ff1a
-  api_secret: 3b5c70012d49dd707dbd8f1f5f394ee41f20cdf43889fb969ff9c7f8205f5195
+  cloud_url: https://1ff1ae8c39b5d7583f3ab25f8db2a1bc.cn1.crs.easyar.com:443
+  crs_app_id: c0214e00fac664ae88430d4c1564a605
+  api_key: 7ddd3dc93acf3a5697d740008fedff06
+  api_secret: d88e428888d4fa8dab625999d2656349d7bdb73f01d987456a2356cf3c04be2a
 qi_niu:
   access_key: 1HlGSQlD_2sLtyRB9BlOTv7VibTfA48mXQ6zer8D
   secret_key: nz5nqqZjtHFtgCc8eQ6wLZurnEutTrB_7src69jl

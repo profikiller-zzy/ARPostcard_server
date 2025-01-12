@@ -36,6 +36,7 @@ require (
 	github.com/gammazero/toposort v0.1.1 // indirect
 	github.com/go-sql-driver/mysql v1.8.1 // indirect
 	github.com/gofrs/flock v0.8.1 // indirect
+	github.com/howeyc/fsnotify v0.9.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.8 // indirect
@@ -44,6 +45,8 @@ require (
 	github.com/nyaruka/phonenumbers v1.4.0 // indirect
 	github.com/onsi/ginkgo v1.16.5 // indirect
 	github.com/onsi/gomega v1.34.2 // indirect
+	github.com/pilu/config v0.0.0-20131214182432-3eb99e6c0b9a // indirect
+	github.com/pilu/fresh v0.0.0-20240621171608-8d1fef547a99 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
 	github.com/rs/zerolog v1.33.0 // indirect

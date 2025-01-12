@@ -101,6 +101,8 @@ github.com/henrylee2cn/ameda v1.4.10/go.mod h1:liZulR8DgHxdK+MEwvZIylGnmcjzQ6N6f
 github.com/henrylee2cn/goutil v0.0.0-20210127050712-89660552f6f8/go.mod h1:Nhe/DM3671a5udlv2AdV2ni/MZzgfv2qrPL5nIi3EGQ=
 github.com/hertz-contrib/cors v0.1.0 h1:PQ5mATygSMzTlYtfyMyHjobYoJeHKe2Qt3tcAOgbI6E=
 github.com/hertz-contrib/cors v0.1.0/go.mod h1:VPReoq+Rvu/lZOfpp5CcX3x4mpZUc3EpSXBcVDcbvOc=
+github.com/howeyc/fsnotify v0.9.0 h1:0gtV5JmOKH4A8SsFxG2BczSeXWWPvcMT0euZt5gDAxY=
+github.com/howeyc/fsnotify v0.9.0/go.mod h1:41HzSPxBGeFRQKEEwgh49TRw/nKBsYZ2cF1OzPjSJsA=
 github.com/hpcloud/tail v1.0.0/go.mod h1:ab1qPbhIpdTxEkNHXyeSf5vhxWSCs/tWer42PpOxQnU=
 github.com/iancoleman/strcase v0.3.0/go.mod h1:iwCmte+B7n89clKwxIoIXy/HfoL7AsD47ZCWhYzw7ho=
 github.com/jessevdk/go-flags v1.4.0/go.mod h1:4FA24M0QyGHXBuZZK/XkWh8h0e1EYbRYJSGM75WSRxI=
@@ -145,6 +147,10 @@ github.com/onsi/gomega v1.7.1/go.mod h1:XdKZgCCFLUoM/7CFJVPcG8C1xQ1AJ0vpAezJrB7J
 github.com/onsi/gomega v1.10.1/go.mod h1:iN09h71vgCQne3DLsj+A5owkum+a2tYe+TOCB1ybHNo=
 github.com/onsi/gomega v1.34.2 h1:pNCwDkzrsv7MS9kpaQvVb1aVLahQXyJ/Tv5oAZMI3i8=
 github.com/onsi/gomega v1.34.2/go.mod h1:v1xfxRgk0KIsG+QOdm7p8UosrOzPYRo60fd3B/1Dukc=
+github.com/pilu/config v0.0.0-20131214182432-3eb99e6c0b9a h1:Tg4E4cXPZSZyd3H1tJlYo6ZreXV0ZJvE/lorNqyw1AU=
+github.com/pilu/config v0.0.0-20131214182432-3eb99e6c0b9a/go.mod h1:9Or9aIl95Kp43zONcHd5tLZGKXb9iLx0pZjau0uJ5zg=
+github.com/pilu/fresh v0.0.0-20240621171608-8d1fef547a99 h1:+X7Gb40b5Bl3v5+3MiGK8Jhemjp65MHc+nkVCfq1Yfc=
+github.com/pilu/fresh v0.0.0-20240621171608-8d1fef547a99/go.mod h1:2LLTtftTZSdAPR/iVyennXZDLZOYzyDn+T0qEKJ8eSw=
 github.com/pkg/diff v0.0.0-20210226163009-20ebb0f2a09e/go.mod h1:pJLUxLENpZxwdsKMEsNbx1VGcRFpLqf3715MtcvvzbA=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
