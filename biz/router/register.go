@@ -12,4 +12,5 @@ func Register(r *server.Hertz) {
 	MenuRegister(arPostcard)
 	UserRegister(arPostcard)
 	ImageRegister(arPostcard)
+	PrefabRegister(arPostcard)
 }
