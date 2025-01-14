@@ -4,19 +4,20 @@ import (
 	"ARPostcard_server/biz/consts"
 	"ARPostcard_server/biz/infra"
 	"ARPostcard_server/biz/model"
+	"ARPostcard_server/biz/model/ctype"
 	"context"
 	"github.com/RanFeng/ierror"
 	"github.com/RanFeng/ilog"
 )
 
 // CreateImage 在数据库中创建一条image记录
-func CreateImage(ctx context.Context, imageID, imageUrl, imageName string, prefabID, videoID int64) error {
+func CreateImage(ctx context.Context, imageID, imageUrl, imageName string, visionType, modelID int64) error {
 	image := &model.Image{
-		ImageID:   imageID,
-		ImageURL:  imageUrl,
-		ImageName: imageName,
-		PrefabID:  prefabID,
-		VideoID:   videoID,
+		ImageID:    imageID,
+		ImageURL:   imageUrl,
+		ImageName:  imageName,
+		VisionType: ctype.VisionType(visionType),
+		ModelID:    modelID,
 	}
 	err := infra.MysqlDB.WithContext(ctx).Debug().
 		Create(image).Error

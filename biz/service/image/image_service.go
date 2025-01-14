@@ -19,7 +19,7 @@ type TargetRequest struct {
 	Video    *multipart.FileHeader
 }
 
-// PrefabRequest 表示获取预制体名称的请求
+// PrefabRequest 表示获取图片绑定的模型(视频或者预制体)URL的请求
 type PrefabRequest struct {
 	TargetID string `json:"image_id" query:"image_id"`
 }
@@ -54,10 +54,10 @@ type ImageInfoResponse struct {
 	Images []*ImageAllInfo `json:"images"`
 }
 
-// PrefabAndVideoResponse 表示获取预制体名称和视频名称的响应
-type PrefabAndVideoResponse struct {
-	Prefab *model.Prefab `json:"prefab"`
-	Video  *model.Video  `json:"video"`
+// ModelURLResponse 表示获取模型的URL的响应
+type ModelURLResponse struct {
+	VisionType int64  `json:"vision_type"` // 视觉类型，1表示视频，2表示预制体
+	ModelURL   string `json:"model_url"`   // 模型的URL
 }
 
 func GetImageInfoFromForm(ctx context.Context, requestContext *app.RequestContext) (*TargetRequest, error) {
@@ -95,6 +95,7 @@ func ImageCreate(ctx context.Context, req TargetRequest) error {
 		return err
 	}
 
+	// 上传视频至七牛云
 	url, name, err := qiniu.UploadFileToQiniu(req.Video)
 	if err != nil {
 		return err
@@ -112,31 +113,31 @@ func ImageCreate(ctx context.Context, req TargetRequest) error {
 	return nil
 }
 
-func GetPrefabAndVideo(ctx context.Context, req PrefabRequest) (*PrefabAndVideoResponse, error) {
+// GetPrefabAndVideo 根据图片的 `targetID` 获取图片绑定的模型(视频或者预制体)URL
+func GetPrefabAndVideo(ctx context.Context, req PrefabRequest) (*ModelURLResponse, error) {
 	image, err := dao.GetImageByImageID(ctx, req.TargetID)
 	if err != nil {
 		return nil, err
 	}
-	var video *model.Video
-	var prefab *model.Prefab
 
-	// 获取prefab
-	prefab, err = dao.GetPrefabById(ctx, image.PrefabID)
-	if err != nil {
-		return nil, err
-	}
-
-	if image.PrefabID == 1 {
-		// 此时代表是视频
-		video, err = dao.GetVideoById(ctx, image.VideoID)
-		if err != nil {
+	result := &ModelURLResponse{}
+	result.VisionType = int64(image.VisionType)
+	// 获取识别图对应模型的URL
+	switch image.VisionType {
+	case 1: // 视频
+		video, err := dao.GetVideoById(ctx, image.ModelID)
+		if err != nil { // 如果查询视频报错，则返回错误
 			return nil, err
 		}
-	}
-
-	result := &PrefabAndVideoResponse{
-		Video:  video,
-		Prefab: prefab,
+		result.ModelURL = video.VideoURL
+	case 2: // 预制体
+		//prefab, err := dao.GetPrefabById(ctx, image.ModelID)
+		if err != nil { // 如果查询预制体报错，则返回错误
+			return nil, err
+		}
+		result.ModelURL = ""
+	default:
+		return nil, nil
 	}
 
 	return result, nil

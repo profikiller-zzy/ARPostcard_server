@@ -26,9 +26,10 @@ func ImageCreate(ctx context.Context, c *app.RequestContext) {
 	utils.RespOK(ctx, c, nil)
 }
 
-func GetPrefabAndVideo(ctx context.Context, c *app.RequestContext) {
+func GetModel(ctx context.Context, c *app.RequestContext) {
 	var err error
 	var req image_service.PrefabRequest
+	// req.TargetID 是easyAR当中的targetID
 
 	if err = c.BindAndValidate(&req); err != nil {
 		utils.RespErr(ctx, c, err)
